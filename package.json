@@ -1,0 +1,23 @@
+{
+  "name": "solidity-smart-contract-developement",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx hardhat test",
+    "compile": "npx hardhat compile",
+    "deploy": "npx hardhat run scripts/deploy-simple-storage.js",
+    "deploy:localhost": "npx hardhat run scripts/deploy-simple-storage.js --network localhost",
+    "interact": "npx hardhat run scripts/interact-simple-storage.js",
+    "node": "npx hardhat node",
+    "clean": "npx hardhat clean",
+    "coverage": "npx hardhat coverage"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^6.1.0",
+    "hardhat": "^2.26.2"
+  }
+}
