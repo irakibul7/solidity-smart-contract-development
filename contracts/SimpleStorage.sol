@@ -5,7 +5,7 @@ pragma solidity ^0.8.19;
 /// @notice Minimal, focused storage contract used by scripts/tests
 contract SimpleStorage {
     // Core storage
-    uint256 private favoriteNumber; // defaults to 0
+    uint256 public favoriteNumber; // defaults to 0
 
     // People storage kept intentionally simple for beginners
     struct Person {
@@ -13,11 +13,11 @@ contract SimpleStorage {
         string name;
     }
 
-    Person[] private people;
+    Person[] public listOfPeople;
     mapping(string => uint256) public nameToFavoriteNumber;
 
     // Core API
-    function store(uint256 _favoriteNumber) public {
+    function store(uint256 _favoriteNumber) public virtual {
         favoriteNumber = _favoriteNumber;
     }
 
@@ -27,17 +27,20 @@ contract SimpleStorage {
 
     // People API
     function addPerson(string memory _name, uint256 _favoriteNumber) public {
-        people.push(Person({favoriteNumber: _favoriteNumber, name: _name}));
+        listOfPeople.push(Person(_favoriteNumber, _name));
         nameToFavoriteNumber[_name] = _favoriteNumber;
     }
 
+    // Convenience getters for tests/scripts
     function getPeopleCount() public view returns (uint256) {
-        return people.length;
+        return listOfPeople.length;
     }
 
     function getPerson(uint256 index) public view returns (uint256, string memory) {
-        if (index >= people.length) revert("Index out of bounds");
-        Person memory p = people[index];
-        return (p.favoriteNumber, p.name);
+        if (index >= listOfPeople.length) {
+            revert("Index out of bounds");
+        }
+        Person storage person = listOfPeople[index];
+        return (person.favoriteNumber, person.name);
     }
 }
