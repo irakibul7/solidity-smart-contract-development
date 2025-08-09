@@ -1,25 +1,36 @@
-# Solidity Smart Contract Development - Cyfrin Updraft Course
+# Solidity Smart Contract Development
 
-Welcome to your Solidity learning journey! This workspace is organized to follow the Cyfrin Updraft Blockchain Developer course, providing a structured environment for learning smart contract development with Hardhat.
+[![CI](https://github.com/irakibul7/solidity-smart-contract-development/actions/workflows/ci.yml/badge.svg)](https://github.com/irakibul7/solidity-smart-contract-development/actions/workflows/ci.yml)
+[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org)
+[![Hardhat](https://img.shields.io/badge/Hardhat-2.x-yellow)](https://hardhat.org)
+[![Stars](https://img.shields.io/github/stars/irakibul7/solidity-smart-contract-development?style=social)](https://github.com/irakibul7/solidity-smart-contract-development/stargazers)
+
+Welcome to your Solidity learning journey! This workspace is organized to follow the Blockchain Developer, providing a structured environment for learning smart contract development with Hardhat.
 
 ## 📁 Project Structure
 
 ```
-├── contracts/                 # Smart contracts
-│   └── SimpleStorage.sol     # Basic storage contract for learning
-├── test/                     # Test files
-│   └── SimpleStorage.js      # Comprehensive tests for SimpleStorage
-├── scripts/                  # Deployment and interaction scripts
+├── contracts/                       # Smart contracts
+│   ├── SimpleStorage.sol           # Minimal storage contract used by tests/scripts
+│   ├── DataTypesDemo.sol           # Basic types, arrays, fixed arrays
+│   ├── StructsAndMappingsDemo.sol  # Structs, arrays, mappings, simple CRUD
+│   ├── ModifiersAndAccessDemo.sol  # Modifiers and access control patterns
+│   ├── FunctionsVisibilityDemo.sol # public/external/internal/private examples
+│   └── MathUtilsDemo.sol           # Pure/view utilities and block globals
+├── test/                           # Test files
+│   └── SimpleStorage.js            # Comprehensive tests for SimpleStorage
+├── scripts/                        # Deployment and interaction scripts
 │   ├── deploy-simple-storage.js
 │   └── interact-simple-storage.js
-├── lessons/                  # Course materials organized by lesson
-│   ├── 01-simple-storage/    # Basic storage concepts
-│   ├── 02-remix-storage/     # Remix IDE lessons
-│   └── 03-fund-me/          # Fund me contract lessons
-├── ignition/                 # Hardhat Ignition deployment modules
-├── hardhat.config.js         # Hardhat configuration
-├── package.json              # Dependencies and scripts
-└── env-template.txt          # Environment variables template
+├── lessons/                        # Course materials organized by lesson
+│   ├── 01-simple-storage/          # Basic storage concepts
+│   ├── 02-remix-storage/           # Remix IDE lessons
+│   └── 03-fund-me/                 # Fund me contract lessons
+├── ignition/                       # Hardhat Ignition deployment modules
+├── hardhat.config.js               # Hardhat configuration
+├── package.json                    # Dependencies and scripts
+└── env-template.txt                # Environment variables template
 ```
 
 ## 🚀 Quick Start
@@ -74,19 +85,43 @@ mkdir scripts
 ## 📚 Learning Path
 
 ### Lesson 1: Simple Storage
-Start with the basic `SimpleStorage.sol` contract to learn:
+Start with the minimal `SimpleStorage.sol` contract to learn:
 - State variables
 - Functions (view, pure, payable)
 - Structs and arrays
 - Mappings
 - Basic contract interaction
 
-### Current Contract: SimpleStorage
-The `SimpleStorage.sol` contract demonstrates:
-- **State Management**: Store and retrieve a favorite number
-- **Data Structures**: Use of structs, arrays, and mappings
-- **Function Types**: View and state-changing functions
-- **Access Patterns**: Public, private visibility
+### Topic-Based Demo Contracts (Beginner Friendly)
+To keep learning focused and approachable, advanced examples were split into dedicated, self-contained demo contracts under `contracts/`:
+
+- **DataTypesDemo.sol**: Basic types, dynamic/fixed arrays, defaults, small array ops.
+- **StructsAndMappingsDemo.sol**: `struct` patterns, arrays of structs, mappings, simple updates.
+- **ModifiersAndAccessDemo.sol**: Common modifiers (`onlyOwner`, `nonReentrant`, time, gas price) and access control.
+- **FunctionsVisibilityDemo.sol**: `public`, `external`, `internal`, `private` with simple call examples.
+- **MathUtilsDemo.sol**: Pure/view utilities, type limits, and block globals.
+
+Use these demos to explore each topic in isolation while `SimpleStorage.sol` remains a clear, minimal contract for tests and scripts.
+
+### Why This Repo (and how you can help it grow)
+- **Beginner-first design**: Minimal core contract + focused topic demos.
+- **Real workflow**: Hardhat project with tests, gas reports, scripts, and lessons.
+- **Approachable examples**: Each demo is short and to the point.
+
+If you find this helpful, please star the repo to help more learners discover it!
+
+### Contributing (Make this the best Solidity learning repo)
+We welcome improvements and new examples. Please:
+- Keep demos short, focused, and beginner-friendly.
+- Prefer adding a new demo contract over bloating existing ones.
+- Add or update tests where it makes sense.
+- Document any new topic briefly in this README.
+
+Suggested contributions:
+- More security best-practice demos (reentrancy, access patterns, checks-effects-interactions).
+- Gas optimization patterns and trade-offs.
+- Events and indexing patterns, logging for frontends.
+- Error handling with custom errors and try/catch between contracts.
 
 ## 🛠 Available Scripts
 
@@ -125,14 +160,42 @@ Test coverage includes:
 
 ## 🚀 Deployment
 
-### Local Development
-```bash
-# Terminal 1: Start local blockchain
-npm run node
+### Local Network Setup & Deployment
 
-# Terminal 2: Deploy contract
+To deploy contracts on a local blockchain network, follow these steps:
+
+#### Step 1: Start Local Blockchain Network
+```bash
+# Start local Hardhat network (keeps running until stopped)
+npm run node
+```
+This command will:
+- Start a local Ethereum network on `http://127.0.0.1:8545`
+- Create 20 test accounts with 10,000 ETH each
+- Display account addresses and private keys
+- Keep the network running until you stop it (Ctrl+C)
+
+#### Step 2: Deploy Contract (New Terminal)
+Open a new terminal window/tab and run:
+```bash
+# Deploy to the local network
 npm run deploy:localhost
 ```
+
+#### Alternative: One-Terminal Deployment
+If you prefer not to keep a persistent local network running:
+```bash
+# Deploy to Hardhat's built-in network (ephemeral)
+npm run deploy
+```
+
+#### Step 3: Interact with Deployed Contract
+```bash
+# Run interaction script
+npm run interact
+```
+
+**Note**: Make sure to update the contract address in `scripts/interact-simple-storage.js` after deployment if using the interaction script.
 
 ### Testnet Deployment
 1. Copy `env-template.txt` to `.env`
@@ -205,13 +268,6 @@ const contract = await SimpleStorage.deploy();
 await contract.store(42);
 console.log(await contract.retrieve());
 ```
-
-## 📖 Course Resources
-
-- **Cyfrin Updraft**: [https://updraft.cyfrin.io/](https://updraft.cyfrin.io/)
-- **Solidity Documentation**: [https://docs.soliditylang.org/](https://docs.soliditylang.org/)
-- **Hardhat Documentation**: [https://hardhat.org/docs](https://hardhat.org/docs)
-- **Ethereum Development**: [https://ethereum.org/developers](https://ethereum.org/developers)
 
 ## 🛡️ Security Notes
 
