@@ -1,0 +1,4 @@
+[33ma0ab6e4[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m Lesson 2: add SimpleStorage/AddFiveStorage/StorageFactory materials; update README and scripts; add tests
+[33mb8b9fd1[m refactor: split SimpleStorage; add demo contracts; docs: README badges; ci: add workflow
+[33m89b9d56[m Add comprehensive Function Visibility Specifiers and Modifiers documentation
+[33m19ea851[m Initial setup: Solidity smart contract development workspace with Hardhat

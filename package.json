@@ -8,8 +8,8 @@
     "deploy": "npx hardhat run scripts/deploy-simple-storage.js",
     "deploy:factory": "npx hardhat run scripts/deploy-storage-factory.js",
     "deploy:add5": "npx hardhat run scripts/deploy-add-five-storage.js",
-    "deploy:localhost": "npx hardhat run scripts/deploy-structs-map.js --network localhost",
-    "interact": "npx hardhat run scripts/interact-simple-storage.js",
+    "deploy:localhost": "npx hardhat run scripts/deploy-fund-me.js --network localhost",
+    "interact": "npx hardhat run scripts/interact-fund-me.js",
     "node": "npx hardhat node",
     "clean": "npx hardhat clean",
     "coverage": "npx hardhat coverage"
