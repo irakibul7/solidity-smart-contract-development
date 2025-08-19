@@ -13,23 +13,41 @@ Welcome to your Solidity learning journey! This workspace is organized to follow
 ```
 ├── contracts/                       # Smart contracts
 │   ├── SimpleStorage.sol           # Minimal storage contract used by tests/scripts
+│   ├── FundMe.sol                  # Crowdfunding contract with price feeds
+│   ├── PriceConverter.sol          # Price conversion utility library
+│   ├── StorageFactory.sol          # Factory pattern for creating storage contracts
+│   ├── AddFiveStorage.sol          # Extended storage contract with inheritance
 │   ├── DataTypesDemo.sol           # Basic types, arrays, fixed arrays
 │   ├── StructsAndMappingsDemo.sol  # Structs, arrays, mappings, simple CRUD
 │   ├── ModifiersAndAccessDemo.sol  # Modifiers and access control patterns
 │   ├── FunctionsVisibilityDemo.sol # public/external/internal/private examples
 │   └── MathUtilsDemo.sol           # Pure/view utilities and block globals
 ├── test/                           # Test files
-│   └── SimpleStorage.js            # Comprehensive tests for SimpleStorage
+│   ├── SimpleStorage.js            # Comprehensive tests for SimpleStorage
+│   ├── Fundme.js                   # Tests for FundMe contract
+│   ├── StorageFactory.js           # Tests for StorageFactory contract
+│   ├── AddFiveStorage.js           # Tests for AddFiveStorage contract
+│   ├── DataTypesDemo.js            # Tests for DataTypesDemo contract
+│   ├── StructsAndMappingsDemo.js   # Tests for StructsAndMappingsDemo contract
+│   ├── ModifiersAndAccessDemo.js   # Tests for ModifiersAndAccessDemo contract
+│   ├── FunctionsVisibilityDemo.js  # Tests for FunctionsVisibilityDemo contract
+│   └── MathUtilsDemo.js            # Tests for MathUtilsDemo contract
 ├── scripts/                        # Deployment and interaction scripts
-│   ├── deploy-simple-storage.js
-│   └── interact-simple-storage.js
-├── lessons/                        # Course materials organized by lesson
-│   ├── 01-simple-storage/          # Basic storage concepts
-│   ├── 02-remix-storage/           # Remix IDE lessons
-│   └── 03-fund-me/                 # Fund me contract lessons
+│   ├── deploy-simple-storage.js    # Deploy SimpleStorage contract
+│   ├── deploy-fund-me.js           # Deploy FundMe contract
+│   ├── deploy-storage-factory.js   # Deploy StorageFactory contract
+│   ├── deploy-add-five-storage.js  # Deploy AddFiveStorage contract
+│   ├── deploy-data-types-demo.js   # Deploy and demo DataTypesDemo
+│   ├── deploy-structs-mappings-demo.js # Deploy and demo StructsAndMappingsDemo
+│   ├── deploy-modifiers-access-demo.js # Deploy and demo ModifiersAndAccessDemo
+│   ├── deploy-functions-visibility-demo.js # Deploy and demo FunctionsVisibilityDemo
+│   ├── deploy-math-utils-demo.js   # Deploy and demo MathUtilsDemo
+│   ├── interact-simple-storage.js  # Interact with SimpleStorage
+│   └── interact-fund-me.js         # Interact with FundMe
 ├── ignition/                       # Hardhat Ignition deployment modules
 ├── hardhat.config.js               # Hardhat configuration
 ├── package.json                    # Dependencies and scripts
+├── QUICK_REFERENCE.md              # Quick reference guide
 └── env-template.txt                # Environment variables template
 ```
 
@@ -82,24 +100,50 @@ mkdir scripts
 # Configuration files (hardhat.config.js, package.json) were updated
 ```
 
-## 📚 Learning Path
 
-### Lesson 1: Simple Storage
-Start with the minimal `SimpleStorage.sol` contract to learn:
-- State variables
-- Functions (view, pure, payable)
-- Structs and arrays
-- Mappings
-- Basic contract interaction
+### 🎯 Educational Demo Contracts (Beginner Friendly)
 
-### Topic-Based Demo Contracts (Beginner Friendly)
-To keep learning focused and approachable, advanced examples were split into dedicated, self-contained demo contracts under `contracts/`:
+This repository includes comprehensive demo contracts designed to teach specific Solidity concepts in isolation. Each contract focuses on a particular topic with practical examples:
 
-- **DataTypesDemo.sol**: Basic types, dynamic/fixed arrays, defaults, small array ops.
-- **StructsAndMappingsDemo.sol**: `struct` patterns, arrays of structs, mappings, simple updates.
-- **ModifiersAndAccessDemo.sol**: Common modifiers (`onlyOwner`, `nonReentrant`, time, gas price) and access control.
-- **FunctionsVisibilityDemo.sol**: `public`, `external`, `internal`, `private` with simple call examples.
-- **MathUtilsDemo.sol**: Pure/view utilities, type limits, and block globals.
+#### **DataTypesDemo.sol** - Solidity Data Types & Arrays
+- **Purpose**: Learn about all Solidity data types and their default values
+- **Concepts**: Booleans, integers (signed/unsigned), addresses, bytes, strings, arrays
+- **Features**: Demonstrates default values, dynamic vs fixed arrays, array operations
+- **Deploy**: `npm run deploy:data-types`
+- **Test**: `npx hardhat test test/DataTypesDemo.js`
+
+#### **StructsAndMappingsDemo.sol** - Data Structures & CRUD Operations
+- **Purpose**: Master structs, mappings, and basic database-like operations
+- **Concepts**: Structs, arrays of structs, mappings, events, custom errors
+- **Features**: Person management system, CRUD operations, data validation
+- **Deploy**: `npm run deploy:structs-mappings`
+- **Test**: `npx hardhat test test/StructsAndMappingsDemo.js`
+
+#### **ModifiersAndAccessDemo.sol** - Access Control & Security Patterns
+- **Purpose**: Learn about modifiers, access control, and security best practices
+- **Concepts**: Modifiers, access control, reentrancy protection, time locks, gas price limits
+- **Features**: Owner-only functions, authorization system, multiple modifier types
+- **Deploy**: `npm run deploy:modifiers-access`
+- **Test**: `npx hardhat test test/ModifiersAndAccessDemo.js`
+
+#### **FunctionsVisibilityDemo.sol** - Function Visibility & Scope
+- **Purpose**: Understand function visibility and scope in Solidity
+- **Concepts**: public, external, internal, private functions, scope rules
+- **Features**: Demonstrates all visibility levels, internal vs external calls
+- **Deploy**: `npm run deploy:functions-visibility`
+- **Test**: `npx hardhat test test/FunctionsVisibilityDemo.js`
+
+#### **MathUtilsDemo.sol** - Pure/View Functions & Block Information
+- **Purpose**: Learn about pure/view functions and blockchain context
+- **Concepts**: Pure functions, view functions, type limits, block information
+- **Features**: Mathematical utilities, type boundary demonstrations, block data
+- **Deploy**: `npm run deploy:math-utils`
+- **Test**: `npx hardhat test test/MathUtilsDemo.js`
+
+#### **Deploy All Demo Contracts**
+```bash
+npm run deploy:all-demos
+```
 
 Use these demos to explore each topic in isolation while `SimpleStorage.sol` remains a clear, minimal contract for tests and scripts.
 
@@ -110,36 +154,103 @@ Use these demos to explore each topic in isolation while `SimpleStorage.sol` rem
 
 If you find this helpful, please star the repo to help more learners discover it!
 
-### Contributing (Make this the best Solidity learning repo)
-We welcome improvements and new examples. Please:
-- Keep demos short, focused, and beginner-friendly.
-- Prefer adding a new demo contract over bloating existing ones.
-- Add or update tests where it makes sense.
-- Document any new topic briefly in this README.
+### 🤝 Contributing (Make this the best Solidity learning repo)
 
-Suggested contributions:
-- More security best-practice demos (reentrancy, access patterns, checks-effects-interactions).
-- Gas optimization patterns and trade-offs.
-- Events and indexing patterns, logging for frontends.
-- Error handling with custom errors and try/catch between contracts.
+We welcome improvements and new examples to make this the ultimate Solidity learning resource. Please:
+
+#### **Contribution Guidelines**
+- Keep demos short, focused, and beginner-friendly
+- Prefer adding new demo contracts over bloating existing ones
+- Add comprehensive tests for all new functionality
+- Update documentation and README for new features
+- Follow the existing code style and commenting patterns
+
+#### **Suggested Contributions**
+
+##### **Security & Best Practices**
+- Reentrancy protection patterns
+- Access control implementations
+- Checks-Effects-Interactions pattern
+- Upgradeable contract patterns
+- Multi-signature wallet examples
+
+##### **Advanced Patterns**
+- Gas optimization techniques and trade-offs
+- Events and indexing patterns for frontends
+- Error handling with custom errors
+- Try/catch between contracts
+- Library implementations
+
+##### **Real-World Examples**
+- Token contracts (ERC20, ERC721)
+- DeFi protocols (lending, DEX)
+- DAO governance systems
+- Oracle integrations
+- Cross-chain functionality
+
+##### **Testing & Development**
+- Fuzzing test examples
+- Integration test patterns
+- Gas benchmarking tools
+- Security analysis tools
+- Deployment automation
+
+#### **How to Contribute**
+1. **Fork the repository**
+2. **Create a feature branch**: `git checkout -b feature/amazing-feature`
+3. **Add your improvements**: New contracts, tests, or documentation
+4. **Test thoroughly**: Ensure all tests pass
+5. **Update documentation**: README, comments, and examples
+6. **Submit a pull request**: With clear description of changes
+
+#### **Quality Standards**
+- **Educational Value**: Each addition should teach a clear concept
+- **Code Quality**: Follow Solidity best practices and security patterns
+- **Documentation**: Comprehensive comments and examples
+- **Testing**: Full test coverage with edge cases
+- **Gas Efficiency**: Consider gas optimization where appropriate
+
+Let's make this the go-to resource for learning Solidity! 🚀
 
 ## 🛠 Available Scripts
 
+### Core Development
 | Command | Description |
 |---------|-------------|
 | `npm run compile` | Compile all smart contracts |
 | `npm run test` | Run all tests with gas reporting |
-| `npm run deploy` | Deploy to local hardhat network |
-| `npm run deploy:localhost` | Deploy to localhost network |
-| `npm run interact` | Interact with deployed contract |
-| `npm run node` | Start local blockchain node |
 | `npm run clean` | Clean compiled artifacts |
 | `npm run coverage` | Run test coverage analysis |
 
+### Main Contract Deployment
+| Command | Description |
+|---------|-------------|
+| `npm run deploy` | Deploy SimpleStorage to local hardhat network |
+| `npm run deploy:localhost` | Deploy FundMe to localhost network |
+| `npm run deploy:factory` | Deploy StorageFactory contract |
+| `npm run deploy:add5` | Deploy AddFiveStorage contract |
+
+### Demo Contract Deployment
+| Command | Description |
+|---------|-------------|
+| `npm run deploy:data-types` | Deploy and demo DataTypesDemo contract |
+| `npm run deploy:structs-mappings` | Deploy and demo StructsAndMappingsDemo contract |
+| `npm run deploy:modifiers-access` | Deploy and demo ModifiersAndAccessDemo contract |
+| `npm run deploy:functions-visibility` | Deploy and demo FunctionsVisibilityDemo contract |
+| `npm run deploy:math-utils` | Deploy and demo MathUtilsDemo contract |
+| `npm run deploy:all-demos` | Deploy all demo contracts in sequence |
+
+### Interaction & Network
+| Command | Description |
+|---------|-------------|
+| `npm run interact` | Interact with deployed FundMe contract |
+| `npm run node` | Start local blockchain node |
+
 ## 🧪 Testing
 
-The project includes comprehensive tests for the SimpleStorage contract:
+The project includes comprehensive tests for all contracts with detailed coverage:
 
+### Running Tests
 ```bash
 # Run all tests
 npm run test
@@ -149,14 +260,70 @@ REPORT_GAS=true npm run test
 
 # Run specific test file
 npx hardhat test test/SimpleStorage.js
+npx hardhat test test/DataTypesDemo.js
+npx hardhat test test/StructsAndMappingsDemo.js
+npx hardhat test test/ModifiersAndAccessDemo.js
+npx hardhat test test/FunctionsVisibilityDemo.js
+npx hardhat test test/MathUtilsDemo.js
 ```
 
-Test coverage includes:
-- Contract deployment
-- State variable management
-- Function execution
-- Error handling
+### Test Coverage by Contract
+
+#### **SimpleStorage.js** - Core Storage Contract
+- Contract deployment and initialization
+- State variable management (favorite number)
+- People management (add, retrieve, count)
+- Mapping operations and lookups
+- Error handling (index bounds)
 - Gas consumption analysis
+
+#### **DataTypesDemo.js** - Data Types & Arrays
+- Default values for all Solidity types
+- Boolean, integer, address, bytes defaults
+- Dynamic and fixed array operations
+- Array manipulation and access
+- Gas testing for array operations
+
+#### **StructsAndMappingsDemo.js** - Data Structures
+- Person struct creation and management
+- Mapping operations (name → number, address → person)
+- CRUD operations (add, update, retrieve)
+- Event emission verification
+- Custom error handling
+- Data consistency across mappings
+
+#### **ModifiersAndAccessDemo.js** - Access Control
+- Owner access control verification
+- Modifier functionality testing
+- Number validation and limits
+- Non-reentrant protection
+- Time-based restrictions
+- Gas price limitations
+- Authorization system
+
+#### **FunctionsVisibilityDemo.js** - Function Scope
+- Public function accessibility
+- External function calls (direct and via 'this')
+- Internal function restrictions
+- Private function restrictions
+- Cross-function visibility rules
+- Multiple account testing
+
+#### **MathUtilsDemo.js** - Utilities & Block Info
+- Pure function consistency
+- Type limit verification
+- Block information accuracy
+- Time progression testing
+- Function purity validation
+- Cross-function integration
+
+### Test Features
+- **Comprehensive Coverage**: Each contract has 15-25+ test cases
+- **Gas Analysis**: Built-in gas consumption testing
+- **Error Handling**: Tests for expected failures and edge cases
+- **Multi-Account Testing**: Verifies access control and permissions
+- **State Consistency**: Ensures data integrity across operations
+- **Educational Value**: Tests demonstrate Solidity concepts clearly
 
 ## 🚀 Deployment
 
@@ -220,40 +387,120 @@ npm run interact
 - **Localhost**: Connect to local running node
 - **Sepolia**: Ethereum testnet (configure in hardhat.config.js)
 
-## 🎯 Learning Objectives
+## 🎯 Learning Path & Objectives
 
-By working through this project, you'll learn:
+This repository is designed as a comprehensive learning journey through Solidity smart contract development. Follow this structured path to build your skills progressively:
 
-1. **Smart Contract Basics**
-   - Solidity syntax and structure
-   - State variables and functions
-   - Data types and storage
+### 🚀 **Phase 1: Fundamentals** (Start Here)
+1. **SimpleStorage.sol** - Your first smart contract
+   - Learn basic Solidity syntax and structure
+   - Understand state variables and functions
+   - Master basic data types and storage
+   - Practice with tests and deployment scripts
 
-2. **Development Tools**
-   - Hardhat framework
-   - Testing with Mocha/Chai
-   - Deployment automation
+### 📚 **Phase 2: Core Concepts** (Educational Demos)
+2. **DataTypesDemo.sol** - Master Solidity Types
+   - Learn all data types and their default values
+   - Understand arrays (dynamic vs fixed)
+   - Practice type manipulation and operations
 
-3. **Best Practices**
-   - Contract testing strategies
-   - Gas optimization
-   - Security considerations
+3. **StructsAndMappingsDemo.sol** - Data Structures
+   - Master structs and complex data types
+   - Learn mapping operations and CRUD
+   - Understand events and error handling
+
+4. **FunctionsVisibilityDemo.sol** - Function Scope
+   - Learn public, external, internal, private
+   - Understand function accessibility rules
+   - Practice cross-function calls
+
+5. **MathUtilsDemo.sol** - Pure Functions & Context
+   - Learn pure vs view functions
+   - Understand blockchain context (block info)
+   - Master type limits and mathematical operations
+
+6. **ModifiersAndAccessDemo.sol** - Security & Access Control
+   - Learn modifiers and access control patterns
+   - Understand security best practices
+   - Practice reentrancy protection and time locks
+
+### 🏗️ **Phase 3: Advanced Patterns** (Real-World Examples)
+7. **StorageFactory.sol** - Factory Pattern
+   - Learn design patterns in Solidity
+   - Understand contract creation and management
+
+8. **FundMe.sol** - Real-World Application
+   - Learn price feeds and external dependencies
+   - Understand payable functions and value handling
+   - Practice with Chainlink integration
+
+### 🛠️ **Phase 4: Development Tools & Best Practices**
+- **Hardhat Framework**: Complete development environment
+- **Testing**: Comprehensive test coverage with Mocha/Chai
+- **Deployment**: Automated deployment scripts
+- **Gas Optimization**: Built-in gas reporting and analysis
+- **Security**: Access control and security patterns
+
+### 📖 **Learning Resources**
+- **Code Comments**: Every contract is heavily commented
+- **Test Files**: Tests demonstrate expected behavior
+- **Deployment Scripts**: See contracts in action
+- **QUICK_REFERENCE.md**: Essential commands and patterns
+- **Gas Reports**: Learn about gas optimization
+
+### 🎯 **What You'll Master**
+- **Solidity Fundamentals**: Syntax, types, functions, storage
+- **Smart Contract Design**: Patterns, security, best practices
+- **Development Workflow**: Testing, deployment, interaction
+- **Real-World Skills**: Price feeds, access control, factory patterns
+- **Security Awareness**: Reentrancy, access control, validation
 
 ## 🔍 Contract Interaction
 
-### Using the Deploy Script
-```bash
-npm run deploy
-```
-This will:
-- Deploy the SimpleStorage contract
-- Set an initial favorite number
-- Add a sample person
-- Display all interactions
+### Using the Deploy Scripts
 
-### Using the Interact Script
+#### **Main Contracts**
 ```bash
-# First, update the contract address in scripts/interact-simple-storage.js
+# Deploy SimpleStorage (fundamentals)
+npm run deploy
+
+# Deploy FundMe (crowdfunding)
+npm run deploy:localhost
+
+# Deploy StorageFactory (factory pattern)
+npm run deploy:factory
+
+# Deploy AddFiveStorage (inheritance)
+npm run deploy:add5
+```
+
+#### **Educational Demo Contracts**
+```bash
+# Deploy individual demo contracts
+npm run deploy:data-types          # Data types and arrays
+npm run deploy:structs-mappings    # Structs and mappings
+npm run deploy:modifiers-access    # Access control and security
+npm run deploy:functions-visibility # Function visibility
+npm run deploy:math-utils          # Pure functions and block info
+
+# Deploy all demo contracts at once
+npm run deploy:all-demos
+```
+
+Each demo deployment script will:
+- Deploy the contract
+- Demonstrate key functionality
+- Show expected outputs
+- Test error conditions
+- Provide educational insights
+
+### Using the Interact Scripts
+```bash
+# Interact with SimpleStorage
+npm run interact
+
+# Interact with FundMe (after deployment)
+# Update contract address in scripts/interact-fund-me.js first
 npm run interact
 ```
 
@@ -275,12 +522,5 @@ console.log(await contract.retrieve());
 - Use environment variables for sensitive data
 - Test thoroughly before mainnet deployment
 - Consider using multi-signature wallets for production
-
-## 📝 Next Steps
-
-1. Complete the SimpleStorage exercises
-2. Move to `lessons/02-remix-storage/` for Remix IDE practice
-3. Progress to `lessons/03-fund-me/` for more advanced concepts
-4. Explore DeFi protocols and advanced patterns
 
 Happy coding! 🚀

@@ -10,6 +10,12 @@
     "deploy:add5": "npx hardhat run scripts/deploy-add-five-storage.js",
     "deploy:localhost": "npx hardhat run scripts/deploy-fund-me.js --network localhost",
     "interact": "npx hardhat run scripts/interact-fund-me.js",
+    "deploy:data-types": "npx hardhat run scripts/deploy-data-types-demo.js",
+    "deploy:structs-mappings": "npx hardhat run scripts/deploy-structs-mappings-demo.js",
+    "deploy:modifiers-access": "npx hardhat run scripts/deploy-modifiers-access-demo.js",
+    "deploy:functions-visibility": "npx hardhat run scripts/deploy-functions-visibility-demo.js",
+    "deploy:math-utils": "npx hardhat run scripts/deploy-math-utils-demo.js",
+    "deploy:all-demos": "npm run deploy:data-types && npm run deploy:structs-mappings && npm run deploy:modifiers-access && npm run deploy:functions-visibility && npm run deploy:math-utils",
     "node": "npx hardhat node",
     "clean": "npx hardhat clean",
     "coverage": "npx hardhat coverage"
